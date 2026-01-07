@@ -1,48 +1,129 @@
-export default function Features() {
+'use client';
+
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+
+export default function Features({ onStatsAnimationComplete }: { onStatsAnimationComplete?: () => void }) {
+  const scrollingTextRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollingTextRef.current) {
+      const textElement = scrollingTextRef.current;
+
+      // Kill any existing animations and clear CSS animations
+      gsap.killTweensOf(textElement);
+      textElement.style.animation = 'none';
+
+      // Create continuous scrolling with no gaps
+      gsap.set(textElement, { x: 0, clearProps: 'all' });
+
+      console.log('Starting VERY slow animation with 200 second duration');
+
+      gsap.to(textElement, {
+        x: '-100%',
+        duration: 2000,
+        ease: 'none',
+        repeat: -1,
+        onStart: () => console.log('GSAP Animation started - faster speed'),
+        onRepeat: () => console.log('GSAP Animation repeating')
+      });
+    }
+
+    // Stats section entrance animation from bottom to top
+    if (statsRef.current) {
+      console.log('Stats ref found, starting animation');
+      gsap.set(statsRef.current, { y: 50, opacity: 0 });
+      gsap.to(statsRef.current, {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power3.out",
+        delay: 0.3,
+        onComplete: () => {
+          console.log('Stats animation complete');
+          if (onStatsAnimationComplete) {
+            onStatsAnimationComplete();
+          }
+        }
+      });
+    } else {
+      console.log('Stats ref not found');
+    }
+  }, []);
+
   return (
-    <section id="features" className="py-32 bg-gradient-to-b from-transparent to-purple-900/10">
+    <section id="features" className="py-15 -mt-16 relative ">
+      {/* Top white divider line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-white/20"></div>
+
       <div className="max-w-7xl mx-auto px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-            Why Choose <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Stimuler</span>?
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Advanced AI technology meets personalized learning to help you master English speaking faster than ever before.
-          </p>
+        {/* Funding Announcement - Scrolling */}
+        <div className="text-center mb-20 overflow-hidden relative h-16">
+          {/* Left shadow gradient */}
+          <div className="absolute left-0 top-0 w-20 h-full z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #0a0a0a, transparent)' }}></div>
+
+          {/* Right shadow gradient */}
+          <div className="absolute right-0 top-0 w-20 h-full z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #0a0a0a, transparent)' }}></div>
+
+          <div
+            ref={scrollingTextRef}
+            className="absolute whitespace-nowrap animate-scroll-fast"
+          >
+            <span className="text-4xl text-purple-400 text-glow-purple">
+              Stimuler bags <span className="text-purple-300 font-bold">$3.75mn</span> to strengthen its AI - led English tutor! <span className="text-purple-300 font-bold">Checkout👆</span>
+              <span className="mx-16"> </span>
+              Stimuler bags <span className="text-purple-300 font-bold">$3.75mn</span> to strengthen its AI - led English tutor! <span className="text-purple-300 font-bold">Checkout👆</span>
+              <span className="mx-16"> </span>
+              Stimuler bags <span className="text-purple-300 font-bold">$3.75mn</span> to strengthen its AI - led English tutor! <span className="text-purple-300 font-bold">Checkout👆</span>
+              <span className="mx-16"> </span>
+              Stimuler bags <span className="text-purple-300 font-bold">$3.75mn</span> to strengthen its AI - led English tutor! <span className="text-purple-300 font-bold">Checkout👆</span>
+              <span className="mx-16"> </span>
+              Stimuler bags <span className="text-purple-300 font-bold">$3.75mn</span> to strengthen its AI - led English tutor! <span className="text-purple-300 font-bold">Checkout👆</span>
+              <span className="mx-16"> </span>
+              Stimuler bags <span className="text-purple-300 font-bold">$3.75mn</span> to strengthen its AI - led English tutor! <span className="text-purple-300 font-bold">Checkout👆</span>
+              <span className="mx-16"> </span>
+              Stimuler bags <span className="text-purple-300 font-bold">$3.75mn</span> to strengthen its AI - led English tutor! <span className="text-purple-300 font-bold">Checkout👆</span>
+              <span className="mx-16"> </span>
+              Stimuler bags <span className="text-purple-300 font-bold">$3.75mn</span> to strengthen its AI - led English tutor! <span className="text-purple-300 font-bold">Checkout👆</span>
+              <span className="mx-16"> </span>
+              Stimuler bags <span className="text-purple-300 font-bold">$3.75mn</span> to strengthen its AI - led English tutor! <span className="text-purple-300 font-bold">Checkout👆</span>
+            </span>
+          </div>
         </div>
-        
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800/50 hover:border-purple-500/30 transition-all">
-            <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-700 rounded-2xl flex items-center justify-center mb-6">
-              <span className="text-2xl">🎯</span>
-            </div>
-            <h3 className="text-2xl font-bold mb-4">Personalized Feedback</h3>
-            <p className="text-gray-300 leading-relaxed">
-              Get detailed, AI-powered feedback on your pronunciation, grammar, and speaking patterns to improve faster.
-            </p>
+
+        {/* Stats Section */}
+        <div ref={statsRef} className="flex flex-col md:flex-row items-center justify-center gap-90 max-w-5xl mx-auto -mt-8">
+          {/* Trusted Worldwide */}
+          <div className="text-left -ml-8 ">
+            <h3 className="text-3xl font-medium text-white leading-tight">Trusted</h3>
+            <p className="text-3xl font-medium text-white leading-tight">Worldwide</p>
           </div>
-          
-          <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800/50 hover:border-purple-500/30 transition-all">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mb-6">
-              <span className="text-2xl">🤖</span>
+
+          {/* Stats - closer together */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-15 items-center">
+            <div className="text-center">
+              <div className="text-5xl  text-white mb-2">200+</div>
+              <p className="text-sm text-gray-400">Countries world wide</p>
             </div>
-            <h3 className="text-2xl font-bold mb-4">AI Coach</h3>
-            <p className="text-gray-300 leading-relaxed">
-              Practice with our intelligent AI coach that adapts to your learning style and provides real-time guidance.
-            </p>
-          </div>
-          
-          <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-800/50 hover:border-purple-500/30 transition-all">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-700 rounded-2xl flex items-center justify-center mb-6">
-              <span className="text-2xl">📈</span>
+
+            <div className="text-center">
+              <div className="text-5xl  text-white mb-2">4M+</div>
+              <p className="text-sm text-gray-400">App Downloads</p>
             </div>
-            <h3 className="text-2xl font-bold mb-4">Track Progress</h3>
-            <p className="text-gray-300 leading-relaxed">
-              Monitor your improvement with detailed analytics and celebrate milestones as you advance.
-            </p>
+
+            <div className="text-center">
+              <div className="text-5xl  text-white mb-2 flex items-center justify-center gap-1">
+                4.7<span className="text-yellow-400 text-4xl">⭐</span>
+              </div>
+              <p className="text-sm text-gray-400">App rating</p>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Bottom white divider line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-white/20"></div>
     </section>
   );
 }
