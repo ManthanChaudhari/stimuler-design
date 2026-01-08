@@ -2,30 +2,36 @@
 
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-export default function Mission({ shouldAnimate }: { shouldAnimate?: boolean }) {
+gsap.registerPlugin(ScrollTrigger);
+
+export default function Mission() {
     const missionRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
-        // Set initial state - always hidden until animation starts
+        // Set initial state - always hidden until scroll trigger
         if (missionRef.current) {
             gsap.set(missionRef.current, { y: 60, opacity: 0 });
-        }
-    }, []);
 
-    useEffect(() => {
-        if (shouldAnimate && missionRef.current) {
-            console.log('Mission ref found, starting animation');
             gsap.to(missionRef.current, {
                 y: 0,
                 opacity: 1,
                 duration: 1.5,
                 ease: "power3.out",
-                delay: 0.2,
-                onComplete: () => console.log('Mission animation complete')
+                scrollTrigger: {
+                    trigger: missionRef.current,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                }
             });
         }
-    }, [shouldAnimate]);
+
+        // Cleanup
+        return () => {
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+        };
+    }, []);
 
     return (
         <section ref={missionRef} className="py-16 px-8">

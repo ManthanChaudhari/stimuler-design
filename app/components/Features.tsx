@@ -2,8 +2,11 @@
 
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-export default function Features({ onStatsAnimationComplete }: { onStatsAnimationComplete?: () => void }) {
+gsap.registerPlugin(ScrollTrigger);
+
+export default function Features() {
   const scrollingTextRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
 
@@ -30,21 +33,19 @@ export default function Features({ onStatsAnimationComplete }: { onStatsAnimatio
       });
     }
 
-    // Stats section entrance animation from bottom to top
+    // Stats section scroll-triggered animation
     if (statsRef.current) {
-      console.log('Stats ref found, starting animation');
       gsap.set(statsRef.current, { y: 50, opacity: 0 });
+
       gsap.to(statsRef.current, {
         y: 0,
         opacity: 1,
         duration: 1.2,
         ease: "power3.out",
-        delay: 0.3,
-        onComplete: () => {
-          console.log('Stats animation complete');
-          if (onStatsAnimationComplete) {
-            onStatsAnimationComplete();
-          }
+        scrollTrigger: {
+          trigger: statsRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none"
         }
       });
     } else {
