@@ -32,7 +32,7 @@ export default function ProductProcess() {
         const progressLine1 = progressLine1Ref.current
         const progressLine2 = progressLine2Ref.current
         const progressLine3 = progressLine3Ref.current
-        const video = videoRef.current
+        // const video = videoRef.current // Unused
 
         if (!progressLine1 || !progressLine2 || !progressLine3) return
 
@@ -141,7 +141,7 @@ export default function ProductProcess() {
                                     ></div>
                                 </div>
                                 <p className="text-gray-300 text-base leading-relaxed">
-                                    Whether that's a direct conversation with our AI Coach Sarah on 100+ topics, or scenario based
+                                    Whether that&apos;s a direct conversation with our AI Coach Sarah on 100+ topics, or scenario based
                                     practice or just random challenges, we make sure that you speak more English on Stimuler than you have
                                     ever done before
                                 </p>

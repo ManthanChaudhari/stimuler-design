@@ -13,7 +13,7 @@ export default function Hero() {
   const grammarPopupRef = useRef<HTMLDivElement>(null);
   const characterRef = useRef<HTMLDivElement>(null);
   const phoneRef = useRef<HTMLDivElement>(null);
-  const backgroundRef = useRef<HTMLDivElement>(null);
+  // const backgroundRef = useRef<HTMLDivElement>(null); // Unused
   const grammarBgRef = useRef<HTMLDivElement>(null);
   const popupBgRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -154,7 +154,7 @@ export default function Hero() {
         <div className="space-y-4 -mt-30">
           <h1 ref={headingRef} className="font-inter font-semibold text-5xl lg:text-4xl xl:text-5xl leading-[1.1] tracking-tight text-white text-left">
             <span className="block whitespace-nowrap ">
-              World's fastest way to Speak
+              World&apos;s fastest way to Speak
             </span>
             <span className="block">
               English better!
