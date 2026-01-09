@@ -1,11 +1,11 @@
 export default function About() {
   return (
-    <section id="about" className="py-32 bg-gradient-to-b from-purple-900/10 to-transparent">
+    <section id="about" className="py-32 bg-[#0a0a0f]">
       <div className="max-w-7xl mx-auto px-8">
         <div className="text-center">
           <h2 className="text-4xl lg:text-5xl font-bold mb-8">
             Meet the Minds<br />
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               Behind the Magic
             </span>
           </h2>

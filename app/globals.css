@@ -37,3 +37,17 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* Fast scrolling animation */
+@keyframes scroll-fast {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll-fast {
+  animation: scroll-fast 500s linear infinite;
+}

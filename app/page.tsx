@@ -1,10 +1,12 @@
 import Navigation from "./components/Navigation";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
-import Testimonials from "./components/Testimonials";
+import Mission from "./components/Mission";
+import PhoneShowcase from "./components/PhoneShowcase";
 import About from "./components/About";
 import CTA from "./components/CTA";
 import Footer from "./components/Footer";
+import ProductProcess from "./components/ProductProcess";
 
 export default function Home() {
   return (
@@ -18,8 +20,13 @@ export default function Home() {
       {/* Features Section */}
       <Features />
 
+      {/* Mission Statement */}
+      <Mission />
+
       {/* Testimonials Section */}
-      <Testimonials />
+      <PhoneShowcase />
+
+      <ProductProcess />
 
       {/* About Section */}
       <About />

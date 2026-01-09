@@ -11,8 +11,94 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Hero() {
   const popupRef = useRef<HTMLDivElement>(null);
   const grammarPopupRef = useRef<HTMLDivElement>(null);
+  const characterRef = useRef<HTMLDivElement>(null);
+  const phoneRef = useRef<HTMLDivElement>(null);
+  const backgroundRef = useRef<HTMLDivElement>(null);
+  const grammarBgRef = useRef<HTMLDivElement>(null);
+  const popupBgRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
+    // Heading entrance animation from bottom to top
+    if (headingRef.current) {
+      console.log('Heading ref found, starting animation');
+      gsap.set(headingRef.current, { y: 50, opacity: 0 });
+      gsap.to(headingRef.current, {
+        y: 0,
+        opacity: 1,
+        duration: 1.0,
+        ease: "power3.out",
+        delay: 0.1,
+        onComplete: () => console.log('Heading animation complete')
+      });
+    } else {
+      console.log('Heading ref not found');
+    }
+
+    // Character entrance animation on page load
+    if (characterRef.current) {
+      console.log('Character ref found, starting animation');
+      gsap.set(characterRef.current, { y: 100, opacity: 0 });
+      gsap.to(characterRef.current, {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: "power3.out",
+        delay: 0.5,
+        onComplete: () => console.log('Character animation complete')
+      });
+    } else {
+      console.log('Character ref not found');
+    }
+
+    // Phone entrance animation from right to left
+    if (phoneRef.current) {
+      console.log('Phone ref found, starting animation');
+      gsap.set(phoneRef.current, { x: 200, opacity: 0 });
+      gsap.to(phoneRef.current, {
+        x: 0,
+        opacity: 1,
+        duration: 1.0,
+        ease: "power2.out",
+        delay: 0.2,
+        onComplete: () => console.log('Phone animation complete')
+      });
+    } else {
+      console.log('Phone ref not found');
+    }
+
+    // Grammar popup background entrance animation
+    if (grammarBgRef.current) {
+      console.log('Grammar background ref found, starting animation');
+      gsap.set(grammarBgRef.current, { scale: 0.5, opacity: 0 });
+      gsap.to(grammarBgRef.current, {
+        scale: 1,
+        opacity: 1,
+        duration: 1.0,
+        ease: "back.out(1.7)",
+        delay: 1.0,
+        onComplete: () => console.log('Grammar background animation complete')
+      });
+    } else {
+      console.log('Grammar background ref not found');
+    }
+
+    // Popup background entrance animation
+    if (popupBgRef.current) {
+      console.log('Popup background ref found, starting animation');
+      gsap.set(popupBgRef.current, { scale: 0.5, opacity: 0 });
+      gsap.to(popupBgRef.current, {
+        scale: 1,
+        opacity: 1,
+        duration: 1.0,
+        ease: "back.out(1.7)",
+        delay: 1.2,
+        onComplete: () => console.log('Popup background animation complete')
+      });
+    } else {
+      console.log('Popup background ref not found');
+    }
+
     let lastScrollY = 0;
 
     const handleScroll = () => {
@@ -39,7 +125,7 @@ export default function Hero() {
       if (grammarPopupRef.current) {
         console.log('Animating grammar popup:', scrollDirection);
         gsap.to(grammarPopupRef.current, {
-          y: scrollDirection * 20,
+          y: scrollDirection * 10,
           duration: 0.3,
           ease: "power2.out",
           onComplete: () => {
@@ -66,7 +152,7 @@ export default function Hero() {
 
         {/* Left Side - Hero Text */}
         <div className="space-y-4 -mt-30">
-          <h1 className="font-inter font-semibold text-5xl lg:text-4xl xl:text-5xl leading-[1.1] tracking-tight text-white text-left">
+          <h1 ref={headingRef} className="font-inter font-semibold text-5xl lg:text-4xl xl:text-5xl leading-[1.1] tracking-tight text-white text-left">
             <span className="block whitespace-nowrap ">
               World's fastest way to Speak
             </span>
@@ -130,45 +216,54 @@ export default function Hero() {
         {/* Right Side - Phone and Character */}
         <div className="relative flex justify-center items-center h-[600px]">
 
-          {/* Large gradient background */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-[500px] h-[500px] bg-linear-to-br from-purple-600/30 via-pink-500/20 to-orange-400/20 rounded-full blur-3xl"></div>
+
+          {/* Background image behind phone */}
+          <div className="absolute top-0 -right-80 z-20 overflow-hidden" >
+            <img
+              src="https://framerusercontent.com/images/DqVcgecKChw6jkoEVbhIxuYYCoA.jpg?scale-down-to=2048&width=4096&height=3112"
+              alt="Background design"
+              className="w-full h-[610px] object-cover object-left"
+            />
           </div>
 
           {/* Pronunciation error popup - positioned outside phone on the right */}
           <div className="absolute top-16 right-[-80px] z-40" ref={popupRef}>
-            <div className="bg-black/90 backdrop-blur-sm rounded-bl-3xl rounded-br-3xl rounded-tl-3xl shadow-2xl border border-white/60 min-w-[200px] p-4">
-              <div className="text-white font-medium text-sm mb-1 text-center">You mispronounced</div>
-              <div className="text-red-400 text-sm font-bold mb-3 text-center">" Horror "</div>
-              <button className="bg-linear-to-r from-red-500 to-red-500 hover:from-red-600 hover:to-red-700 text-white px-6 py-2 rounded-lg text-xs font-bold transition-colors shadow-lg w-full">
-                RETRY
-              </button>
+            <div ref={popupBgRef}>
+              <div className="bg-black/90 backdrop-blur-sm rounded-bl-3xl rounded-br-3xl rounded-tl-3xl shadow-2xl border border-white/60 min-w-[200px] p-4">
+                <div className="text-white font-medium text-sm mb-1 text-center">You mispronounced</div>
+                <div className="text-red-400 text-sm font-bold mb-3 text-center">&quot; Horror &quot;</div>
+                <button className="bg-linear-to-r from-red-500 to-red-500 hover:from-red-600 hover:to-red-700 text-white px-6 py-2 rounded-lg text-xs font-bold transition-colors shadow-lg w-full">
+                  RETRY
+                </button>
+              </div>
             </div>
           </div>
 
           {/* Grammar score popup - positioned on the left side of phone */}
           <div className="absolute top-90 left-[-70px] z-40" ref={grammarPopupRef}>
-            <div className="bg-gray-950/90 backdrop-blur-sm rounded-bl-2xl rounded-br-2xl rounded-tl-2xl shadow-2xl border border-white/60 min-w-[180px] min-h-[100px] p-4 relative flex flex-col items-center justify-center">
-              {/* Pointed corner for top-right */}
+            <div ref={grammarBgRef}>
+              <div className="bg-gray-950/90 backdrop-blur-sm rounded-bl-2xl rounded-br-2xl rounded-tl-2xl shadow-2xl border border-white/60 min-w-[180px] min-h-[100px] p-4 relative flex flex-col items-center justify-center">
+                {/* Pointed corner for top-right */}
 
-              <div className="text-white font-medium text-sm mb-1 text-center">
-                You scored <span className="text-blue-400 font-bold">7.5 Band</span> in
+                <div className="text-white font-medium text-sm mb-1 text-center">
+                  You scored <span className="text-blue-400 font-bold">7.5 Band</span> in
+                </div>
+                <div className="text-white font-medium text-sm mb-2 text-center">
+                  Grammar ! <span className="text-green-400 font-bold">Great job</span>
+                </div>
+                <div className="flex justify-center">
+                  <span className="text-lg">🔥</span>
+                </div>
               </div>
-              <div className="text-white font-medium text-sm mb-2 text-center">
-                Grammar ! <span className="text-green-400 font-bold">Great job</span>
+              {/* Small avatar circle */}
+              <div className="absolute -left-12 top-1.1/2 transform -translate-y-1/2 w-10 h-10 bg-linear-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
+                <span className="text-xl">👳‍♀️</span>
               </div>
-              <div className="flex justify-center">
-                <span className="text-lg">🔥</span>
-              </div>
-            </div>
-            {/* Small avatar circle */}
-            <div className="absolute -left-12 top-1.1/2 transform -translate-y-1/2 w-10 h-10 bg-linear-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
-              <span className="text-xl">👳‍♀️</span>
             </div>
           </div>
 
           {/* Main phone with Video */}
-          <div className="relative z-30">
+          <div className="relative z-30" ref={phoneRef}>
             <div className="w-80 h-[630px] bg-linear-to-b from-black-900 to-black-800 rounded-[2.5rem] p-2 shadow-2xl border border-gray-700/50">
               <div className="w-full h-full bg-black rounded-4xl overflow-hidden relative">
                 {/* Status bar */}
@@ -190,6 +285,17 @@ export default function Hero() {
                   </video>
                 </div>
               </div>
+            </div>
+          </div>
+
+          {/* Character image - positioned on the right side */}
+          <div className="absolute bottom-0 right-[-150px] z-40" >
+            <div className="w-80 h-80 relative">
+              <img
+                src="https://framerusercontent.com/images/gaqLxCc0Q5M0Y0gACBMrZLk.png?width=720&height=960"
+                alt="Character illustration"
+                className="w-full h-full object-cover object-top"
+              />
             </div>
           </div>
         </div>
