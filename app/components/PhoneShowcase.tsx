@@ -25,7 +25,7 @@ export default function ProductProcess() {
     if (heading2Ref.current) gsap.set(heading2Ref.current, { y: 50, opacity: 0 })
     if (bgRef.current) gsap.set(bgRef.current, { scale: 0.8, opacity: 0 })
 
-    if (slide1Ref.current) gsap.set(slide1Ref.current, { x: "100vw", opacity: 0 })
+    if (slide1Ref.current) gsap.set(slide1Ref.current, { y: "100vh", opacity: 0 })
     if (slide2Ref.current) gsap.set(slide2Ref.current, { x: "100vw", opacity: 0 })
     if (slide3Ref.current) gsap.set(slide3Ref.current, { x: "100vw", opacity: 0 })
 
@@ -63,26 +63,23 @@ export default function ProductProcess() {
     const phoneTl = gsap.timeline({
       scrollTrigger: {
         trigger: phoneContainerRef.current,
-        start: "top top", // start when section hits top of viewport
+        start: "top top",
         end: "+=300%",
         pin: true,
         scrub: 1,
       },
     })
 
-    // Phone 1: slide in from right, stay, then slide out to left
     phoneTl
-      .to(slide1Ref.current, { x: 0, opacity: 1, duration: 1, ease: "power2.out" })
+      .to(slide1Ref.current, { y: 0, opacity: 1, duration: 1, ease: "power2.out" }) // animate up from bottom
       .to(slide1Ref.current, { duration: 0.5 }) // pause in center
-      .to(slide1Ref.current, { x: "-100vw", opacity: 0, duration: 1, ease: "power2.in" })
+      .to(slide1Ref.current, { x: "-100vw", opacity: 0, duration: 1, ease: "power2.in" }) // exit left
 
-    // Phone 2: slide in from right, stay, then slide out to left
     phoneTl
       .to(slide2Ref.current, { x: 0, opacity: 1, duration: 1, ease: "power2.out" })
       .to(slide2Ref.current, { duration: 0.5 }) // pause in center
       .to(slide2Ref.current, { x: "-100vw", opacity: 0, duration: 1, ease: "power2.in" })
 
-    // Phone 3: slide in from right and stay
     phoneTl.to(slide3Ref.current, { x: 0, opacity: 1, duration: 1, ease: "power2.out" })
 
     return () => {

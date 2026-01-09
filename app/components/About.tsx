@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <section id="about" className="py-32 bg-linear-to-b from-purple-900/10 to-transparent">
+    <section id="about" className="py-32 bg-[#0a0a0f]">
       <div className="max-w-7xl mx-auto px-8">
         <div className="text-center">
           <h2 className="text-4xl lg:text-5xl font-bold mb-8">
