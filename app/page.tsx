@@ -3,8 +3,9 @@ import Hero from "./components/Hero";
 import Features from "./components/Features";
 import Mission from "./components/Mission";
 import PhoneShowcase from "./components/PhoneShowcase";
-import About from "./components/About";
-import CTA from "./components/CTA";
+import Testimonial from "./components/Testimonial";
+import TrophyShowcase from "./components/TrophyShowcase";
+import { LearningJourneyCard } from "./components/LearningJourneyCard";
 import Footer from "./components/Footer";
 import ProductProcess from "./components/ProductProcess";
 
@@ -27,12 +28,13 @@ export default function Home() {
       <PhoneShowcase />
 
       <ProductProcess />
+      <Testimonial />
+      <TrophyShowcase />
+      <LearningJourneyCard />
 
-      {/* About Section */}
-      <About />
 
-      {/* CTA Section */}
-      <CTA />
+
+
 
       {/* Footer */}
       <Footer />

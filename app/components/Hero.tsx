@@ -5,6 +5,7 @@ import '@fontsource/inter/800.css'
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -219,9 +220,11 @@ export default function Hero() {
 
           {/* Background image behind phone */}
           <div className="absolute top-0 -right-80 z-20 overflow-hidden" >
-            <img
+            <Image
               src="https://framerusercontent.com/images/DqVcgecKChw6jkoEVbhIxuYYCoA.jpg?scale-down-to=2048&width=4096&height=3112"
               alt="Background design"
+              width={4096}
+              height={3112}
               className="w-full h-[610px] object-cover object-left"
             />
           </div>
@@ -291,9 +294,11 @@ export default function Hero() {
           {/* Character image - positioned on the right side */}
           <div className="absolute bottom-0 right-[-150px] z-40" >
             <div className="w-80 h-80 relative">
-              <img
+              <Image
                 src="https://framerusercontent.com/images/gaqLxCc0Q5M0Y0gACBMrZLk.png?width=720&height=960"
                 alt="Character illustration"
+                width={720}
+                height={960}
                 className="w-full h-full object-cover object-top"
               />
             </div>
