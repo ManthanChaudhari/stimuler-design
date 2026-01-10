@@ -48,6 +48,118 @@ body {
   }
 }
 
+/* Moving stars animation - Enhanced for better visibility */
+@keyframes starForward {
+  0% {
+    transform: scale(0.2) translateZ(-200px) rotateY(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1) translateZ(0px) rotateY(180deg);
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.5) translateZ(300px) rotateY(360deg);
+    opacity: 0;
+  }
+}
+
+/* Rotating ray animation */
+@keyframes rotateRay {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Moving ray back and forth left to right */
+@keyframes moveRayBackAndForth {
+  0% {
+    transform: translateX(-200px) rotate(0deg);
+  }
+  50% {
+    transform: translateX(200px) rotate(180deg);
+  }
+  100% {
+    transform: translateX(-200px) rotate(360deg);
+  }
+}
+
+/* Dots rotating clockwise in circle */
+@keyframes rotateClockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dots rotating counter-clockwise in circle */
+@keyframes rotateCounterClockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-rotate-ray {
+  animation: rotateRay 12s linear infinite;
+}
+
+.animate-move-ray {
+  animation: moveRayBackAndForth 15s ease-in-out infinite;
+}
+
+.animate-rotate-clockwise {
+  animation: rotateClockwise 8s linear infinite;
+}
+
+.animate-rotate-counter-clockwise {
+  animation: rotateCounterClockwise 10s linear infinite;
+}
+
+.animate-star-forward {
+  animation: starForward linear infinite;
+}
+
 .animate-scroll-fast {
   animation: scroll-fast 500s linear infinite;
+}
+
+/* Marquee animations for testimonials */
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 60s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 60s linear infinite;
 }

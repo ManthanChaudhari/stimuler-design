@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import Image from "next/image"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -60,6 +61,18 @@ export default function ProductProcess() {
       gsap.to(bgRef.current, { scale: 1.1, duration: 3.0, ease: "power2.inOut", repeat: -1, yoyo: true })
     }
 
+    gsap.to(slide1Ref.current, {
+      y: 0,
+      opacity: 1,
+      duration: 1.2,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: phoneContainerRef.current,
+        start: "top 80%",
+        toggleActions: "play none none none",
+      },
+    })
+
     const phoneTl = gsap.timeline({
       scrollTrigger: {
         trigger: phoneContainerRef.current,
@@ -71,13 +84,12 @@ export default function ProductProcess() {
     })
 
     phoneTl
-      .to(slide1Ref.current, { y: 0, opacity: 1, duration: 1, ease: "power2.out" }) // animate up from bottom
-      .to(slide1Ref.current, { duration: 0.5 }) // pause in center
+      .to(slide1Ref.current, { duration: 0.5 }) // pause in center first
       .to(slide1Ref.current, { x: "-100vw", opacity: 0, duration: 1, ease: "power2.in" }) // exit left
 
     phoneTl
       .to(slide2Ref.current, { x: 0, opacity: 1, duration: 1, ease: "power2.out" })
-      .to(slide2Ref.current, { duration: 0.5 }) // pause in center
+      .to(slide2Ref.current, { duration: 0.5 })
       .to(slide2Ref.current, { x: "-100vw", opacity: 0, duration: 1, ease: "power2.in" })
 
     phoneTl.to(slide3Ref.current, { x: 0, opacity: 1, duration: 1, ease: "power2.out" })
@@ -106,7 +118,7 @@ export default function ProductProcess() {
         </h2>
 
         <div ref={phoneContainerRef} className="relative h-screen flex items-center overflow-visible">
-          {/* Background gradient - positioned on right side behind phone */}
+          {/* Background gradient */}
           <div
             ref={bgRef}
             className="absolute top-1/2 right-[15%] transform -translate-y-1/2 w-[500px] h-[500px] bg-linear-to-br from-purple-600/60 via-fuchsia-600/40 to-blue-900/50 rounded-full blur-3xl -z-10 pointer-events-none"
@@ -123,9 +135,11 @@ export default function ProductProcess() {
                   <p className="text-xl">Speak - Get Feedback - Repeat</p>
                 </div>
               </div>
-              <img
+              <Image
                 src="https://framerusercontent.com/images/nZFLe0HyiJwkGdJwuGZsCzsOWJE.png?scale-down-to=2048"
                 alt="Phone mockup 1"
+                width={2048}
+                height={2048}
                 className="h-[90vh] w-auto object-contain"
               />
             </div>
@@ -143,9 +157,11 @@ export default function ProductProcess() {
                   <p className="text-xl">Sample answers and improvement tips also included!</p>
                 </div>
               </div>
-              <img
+              <Image
                 src="https://framerusercontent.com/images/SsejWIDozyuTodLczfNWa2Ri8o.png?width=752&height=1632"
                 alt="Phone mockup 2"
+                width={752}
+                height={1632}
                 className="h-[90vh] w-auto object-contain"
               />
             </div>
@@ -162,9 +178,11 @@ export default function ProductProcess() {
                   <p className="text-xl">Your personal English coach</p>
                 </div>
               </div>
-              <img
+              <Image
                 src="https://framerusercontent.com/images/U1c3Dpil94gETX19iD1A2wziik.png?width=752&height=1632"
                 alt="Phone mockup 3"
+                width={752}
+                height={1632}
                 className="h-[90vh] w-auto object-contain"
               />
             </div>
