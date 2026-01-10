@@ -28,7 +28,8 @@ export function LearningJourneyCard() {
                 delay: Math.random() * 15, // 0 to 15s delay for staggered effect
             })
         }
-        setStars(generatedStars)
+        // Use setTimeout to avoid synchronous setState in effect
+        setTimeout(() => setStars(generatedStars), 0)
     }, [])
 
     return (
@@ -126,7 +127,7 @@ export function LearningJourneyCard() {
                     {/* Content */}
                     <div className="relative z-20 text-center flex flex-col justify-center h-full">
                         <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-4 leading-tight">
-                            Lets Get your personalized fun learning journey started!
+                            Let&apos;s Get your personalized fun learning journey started!
                         </h1>
 
                         <p className="text-gray-300 text-base md:text-lg mb-6 max-w-3xl mx-auto leading-relaxed">
@@ -135,7 +136,7 @@ export function LearningJourneyCard() {
 
                         {/* Button */}
                         <button className="bg-white/15 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-lg font-semibold text-base hover:bg-white/25 transition-all duration-300 hover:scale-105 mx-auto">
-                            Let's Begin
+                            Let&apos;s Begin
                         </button>
                     </div>
                 </div>

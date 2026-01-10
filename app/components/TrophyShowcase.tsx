@@ -1,5 +1,7 @@
 "use client"
 
+import Image from 'next/image'
+
 export default function TrophyShowcase() {
   const generateDots = () => {
     const dots: { angle: number; radius: number; size: number; color: string; animationClass: string }[] = []
@@ -100,10 +102,12 @@ export default function TrophyShowcase() {
           />
 
           {/* Trophy image */}
-          <img
+          <Image
             src="https://framerusercontent.com/images/9byiRjxzLkOX7o6o4cKXcZUSrKs.png?scale-down-to=512"
             alt="Google Play Best AI App Trophy"
-            className="relative z-10 h-[300px] w-[300px] object-contain drop-shadow-2xl"
+            width={300}
+            height={300}
+            className="relative z-10 object-contain drop-shadow-2xl"
           />
         </div>
       </div>
